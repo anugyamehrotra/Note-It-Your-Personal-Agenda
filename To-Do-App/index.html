@@ -1,0 +1,91 @@
+<!-- credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Note It — Your Personal Agenda</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="assets/to-do_logo.png"/>
+        <link rel="stylesheet" href="styles_index.css">
+        <script src="to-do-js.js"></script>
+    </head>
+    <body onload="displayNotes()" onload="updateCategoryCounts()">
+    
+        <section class="css-mainNavBar-pos:fixed">
+           <div class="navBarTop" onclick="window.location.href='index.html'">
+             <img src="assets/to-do-topbar.png">
+           </div>
+           
+ 
+           <div class="navBarSearch">
+               <input type="text" id="searchInput"  placeholder="Search..." onkeyup="searchNotes()">
+           </div>
+        </section>
+
+        <section class="css-sideNavBar-pos:left">
+            <div class="navBarLeft">
+                <ul>
+                    <li><a href="#" onclick="loadTodayView()"> <img src="assets/today_category_img.png"> Today</a></li>
+                    <li><a href="#" onclick="loadWeeklyView()"> <img src="assets/next_week_category_img.png"> Next 7 Days</a></li>
+                    <li><a href="#" onclick="showImportantView()"> <img src="assets/important_category_img.png"> Important</a></li>
+                </ul>
+            </div>
+
+            <div class="css-displayNumberOfTasks-pos:left">
+                <h4>Tasks</h4>
+                <ul>
+            
+                    <li>
+                        <div class="category-content">
+                            <img src="assets/personal_category_img.png"> Personal <span id="countPersonal">0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-content">
+                            <img src="assets/important_category_img.png"> Important <span id="countImportant">0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-content">
+                            <img src="assets/school_category_img.png"> School <span id="countSchool">0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-content">
+                            <img src="assets/work_category_img.png"> Work <span id="countWork">0</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="category-content">
+                            <img src="assets/today_category_img.png"> All <span id="countOther">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        <section class="css-aboveDisplaySection-pos:fixed">
+            <h1>Today</h1>
+        </section>  
+        
+        <section class="css-displayPostsAgenda-pos:right">
+            <div class="css-postContainerView-pos:right" id="postContainerView">
+            </div>
+                  
+        </section>
+
+
+        <section class="css-createReminder-littleCircleButton-pos:bottom-corner-right">
+            <div class="createReminderButton">
+                <a href="createReminder.html" class="button-style">+</a>
+            </div>
+        </section>
+
+    </body>
+
+    <script src="to-do-js.js"></script>
+</html>
+
+<!-- credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ -->
