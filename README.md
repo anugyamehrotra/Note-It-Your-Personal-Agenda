@@ -83,7 +83,7 @@ This project is inspired on the app [todoist.com](todoist.com)
 
 ### 📄 License
 
-eduPortal is protected under the MIT License.  
+Note It is protected under the MIT License.  
 You may view, use, and modify the code under the terms of that license.  
 
 For full details, see the LICENSE.md file at:  
