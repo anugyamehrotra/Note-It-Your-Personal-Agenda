@@ -1,8 +1,9 @@
-# Note-It-Your-Personal-Agenda
+# <img src="https://github.com/user-attachments/assets/8b10970e-201b-4fd0-a647-8e7331378c20" alt="layely logo" width="40" height="40" style="position: relative; top: 6px;" /> Note-It-Your-Personal-Agenda
 
 A personalized sample project: a **dynamic Personalized To-Do List App** built for the Web Dev **NP Hacks**.
 
 This sample demonstrates key web development & DOM Manipulation, Event Handling, and through use of JSON using only **Semantic HTML**, **CSS**, **Javascript**, **JSON**, **Event Handling**, **DOM Manipulation**. <br>It is designed to help students understand how to structure a basic webpage, apply custom styling, and design unique elements using tools like **Figma**.
+
 
 ---
 
