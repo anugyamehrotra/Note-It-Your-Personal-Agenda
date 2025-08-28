@@ -1,0 +1,65 @@
+<!-- credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ -->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Note It — Your Personal Agenda</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="assets/to-do_logo.png"/>
+        <link rel="stylesheet" href="styles_editReminder.css">
+    </head>
+    <body onload="loadEditForm()">
+
+        <section class="css-mainNavBar-pos:fixed">
+           <div class="navBarTop" onclick="window.location.href='index.html'">
+             <img src="assets/to-do-topbar.png">
+           </div>
+        </section>
+
+
+        <h1>Edit Reminder</h1>
+
+        <section class="editReminderForm">
+            <form id="postCreateForm">
+
+                <div class="addTitle" id="addTitle">
+                    <input type="text" id="postTitle" name="noteTitle" placeholder="Title" required><br>
+                </div>
+           
+                <div class="addNoteDesc" id="addNoteDesc">
+                    <textarea id="postContent" name="noteDescription" placeholder="Note" required></textarea><br>
+                </div>
+
+                <div class="addDate" id="addDate">
+                    <input type="date" id="postDate" name="noteDate"><br>
+                </div>
+
+                <div class="addTime" id="addTime">
+                    <input type="time" id="postTime" name="noteTime"><br>
+                </div>
+
+                <div class="addTags" id="addTags">
+                    
+                        <label><input type="checkbox" name="noteTags" value="personal"> <img src="assets/personal_category_img.png"> Personal</label>
+                        <label><input type="checkbox" name="noteTags" value="Important"> <img src="assets/important_category_img.png"> Important</label>
+                        <label><input type="checkbox" name="noteTags" value="School"> <img src="assets/school_category_img.png"> School</label>
+                        <label><input type="checkbox" name="noteTags" value="Work"> <img src="assets/work_category_img.png"> Work</label>
+                        <label><input type="checkbox" name="noteTags" value="Other"> <img src="assets/today_category_img.png"> Other</label>
+                        <label><input type="text" id="customTagInput" placeholder="Add Tags"></label>
+                </div>
+
+                <div class="submitNote" id="submitNote">
+                    <button type="submit">Edit Note</button>
+                </div>
+
+            </form>     
+        </section>
+
+        <script src="to-do-js.js"></script>
+    </body>
+</html>
+
+<!-- credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ -->
+

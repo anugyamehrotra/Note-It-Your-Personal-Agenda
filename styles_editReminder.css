@@ -1,0 +1,319 @@
+/* credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ */ 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #fafafa;
+  color: #202020;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.css-mainNavBar-pos\:fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border-bottom: 1px solid #e1e5e9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navBarTop {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #db4c3f 0%, #e85a4f 100%);
+}
+
+.navBarTop img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+h1 {
+  margin-top: 80px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #202020;
+}
+
+.editReminderForm {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+#postCreateForm {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e1e5e9;
+}
+
+.addTitle,
+.addNoteDesc,
+.addDate,
+.addTime,
+.addTags,
+.submitNote {
+  margin-bottom: 24px;
+}
+
+/* credits: anugya mehrotra 
+@ https://github.com/anugyamehrotra 
+| inspired by https://app.todoist.com/ */ 
+
+
+#postTitle {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+#postTitle:focus {
+  outline: none;
+  border-color: #db4c3f;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(219, 76, 63, 0.1);
+}
+
+#postTitle::placeholder {
+  color: #9aa0a6;
+  font-weight: 400;
+}
+
+#postContent {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fafafa;
+  resize: vertical;
+  transition: all 0.2s ease;
+}
+
+#postContent:focus {
+  outline: none;
+  border-color: #db4c3f;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(219, 76, 63, 0.1);
+}
+
+#postContent::placeholder {
+  color: #9aa0a6;
+}
+
+#postDate,
+#postTime {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  color: #202020;
+}
+
+#postDate:focus,
+#postTime:focus {
+  outline: none;
+  border-color: #db4c3f;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(219, 76, 63, 0.1);
+}
+
+/* credits: anugya mehrotra 
+@ https://github.com/anugyamehrotra 
+| inspired by https://app.todoist.com/ */ 
+
+.addTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.addTags label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.addTags label img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.addTags label:hover {
+  border-color: #db4c3f;
+  background: #fef7f6;
+}
+
+.addTags input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #db4c3f;
+  cursor: pointer;
+}
+
+.addTags input[type="checkbox"]:checked + span,
+.addTags label:has(input[type="checkbox"]:checked) {
+  background: #db4c3f;
+  color: white;
+  border-color: #db4c3f;
+}
+
+#customTagInput {
+  padding: 8px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 20px;
+  font-size: 13px;
+  background: white;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+#customTagInput:focus {
+  outline: none;
+  border-color: #db4c3f;
+  box-shadow: 0 0 0 3px rgba(219, 76, 63, 0.1);
+}
+
+#customTagInput::placeholder {
+  color: #9aa0a6;
+}
+
+.submitNote {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.submitNote button {
+  background: #db4c3f;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(219, 76, 63, 0.2);
+}
+
+.submitNote button:hover {
+  background: #c73e32;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(219, 76, 63, 0.3);
+}
+
+.submitNote button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(219, 76, 63, 0.2);
+}
+
+.addTags label:nth-child(1):has(input:checked) {
+  background: #4285f4;
+  border-color: #4285f4;
+}
+
+.addTags label:nth-child(2):has(input:checked) {
+  background: #ea4335;
+  border-color: #ea4335;
+}
+
+.addTags label:nth-child(3):has(input:checked) {
+  background: #34a853;
+  border-color: #34a853;
+}
+
+.addTags label:nth-child(4):has(input:checked) {
+  background: #fbbc04;
+  border-color: #fbbc04;
+  color: #202020;
+}
+
+.addTags label:nth-child(5):has(input:checked) {
+  background: #9aa0a6;
+  border-color: #9aa0a6;
+}
+
+@media (max-width: 768px) {
+  .editReminderForm {
+    padding: 0 16px 40px;
+  }
+
+  #postCreateForm {
+    padding: 24px 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .addTags {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addTags label {
+    justify-content: center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.editReminderForm {
+  animation: fadeIn 0.5s ease-out;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid #db4c3f;
+  outline-offset: 2px;
+}
+
+/* credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ */ 

@@ -1,0 +1,808 @@
+/* credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ */ 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #ffffff;
+  color: #202020;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.css-mainNavBar-pos\:fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  background-color: #db4c3f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navBarTop {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBarTop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.navBarSearch {
+  position: absolute;
+  top: 52%;
+  right: 900px;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+
+.navBarSearch input {
+  width: 450px;
+  height: 36px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #202020;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navBarSearch input::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+.navBarSearch input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+.navBarSearch input:hover {
+  background-color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.css-sideNavBar-pos\:left {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 280px;
+  height: calc(100vh - 60px);
+  background-color: #fafafa;
+  border-right: 1px solid #e8e8e8;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 20px 0;
+}
+
+.navBarLeft {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.navBarLeft ul {
+  list-style: none;
+}
+
+.navBarLeft li {
+  margin-bottom: 8px;
+}
+
+.navBarLeft a {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #202020;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.navBarLeft a:hover {
+  background-color: #f0f0f0;
+  color: #db4c3f;
+}
+
+.navBarLeft a:active {
+  background-color: #e8e8e8;
+}
+
+.navBarLeft a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.navBarLeft a::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.navBarLeft a[onclick="loadTodayView()"]::before {
+  font-size: 16px;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
+.navBarLeft a[onclick="loadWeeklyView()"]::before {
+  font-size: 16px;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
+/* credits: anugya mehrotra 
+@ https://github.com/anugyamehrotra 
+| inspired by https://app.todoist.com/ */ 
+
+.navBarLeft a[onclick="showImportantView()"]::before {
+  font-size: 16px;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
+.navBarLeft a[onclick="showImportantView()"] img {
+  filter: sepia(1) saturate(5) hue-rotate(340deg) brightness(1.3);
+}
+
+.css-displayNumberOfTasks-pos\:left {
+  padding: 0 20px;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 20px;
+}
+
+.css-displayNumberOfTasks-pos\:left h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding-left: 12px;
+}
+
+.css-displayNumberOfTasks-pos\:left ul {
+  list-style: none;
+}
+
+.css-displayNumberOfTasks-pos\:left li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #202020;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.css-displayNumberOfTasks-pos\:left li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 12px;
+  display: inline-block;
+}
+
+.css-displayNumberOfTasks-pos\:left li .category-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 20px;
+}
+
+.css-displayNumberOfTasks-pos\:left li .category-text {
+  margin-left: 28px;
+  flex: 1;
+  text-align: right;
+}
+
+.css-displayNumberOfTasks-pos\:left li img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.css-aboveDisplaySection-pos\:fixed {
+  position: fixed;
+  top: 60px;
+  left: 280px;
+  right: 0;
+  height: 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 998;
+}
+
+.css-aboveDisplaySection-pos\:fixed h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #202020;
+  margin: 0;
+}
+
+.css-displayPostsAgenda-pos\:right {
+  margin-left: 280px;
+  margin-top: 140px;
+  padding: 20px 40px;
+  min-height: calc(100vh - 140px);
+  background-color: #ffffff;
+}
+
+.css-postContainerView-pos\:right {
+  max-width: 800px;
+}
+
+.note {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e8e8e8;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.note:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: #db4c3f;
+}
+
+.css-createReminder-littleCircleButton-pos\:bottom-corner-right {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1001;
+}
+
+.createReminderButton {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #db4c3f;
+  box-shadow: 0 4px 12px rgba(219, 76, 63, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.createReminderButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(219, 76, 63, 0.6);
+}
+
+.createReminderButton:active {
+  transform: scale(0.95);
+}
+
+.createReminderButton a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.task-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 8px;
+  border: 1px solid #e8e8e8;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.task-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-color: #db4c3f;
+}
+
+.task-item:hover .task-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d0d0d0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.task-checkbox:hover {
+  border-color: #db4c3f;
+  background-color: #fef7f6;
+}
+
+.task-checkbox.completed {
+  background-color: #db4c3f;
+  border-color: #db4c3f;
+}
+
+.task-checkbox.completed::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 40px;
+}
+
+.task-title {
+  font-size: 14px;
+  color: #202020;
+  margin-bottom: 4px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+  color: #808080;
+}
+
+.task-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #808080;
+}
+
+.task-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-date::before {
+  content: "📅";
+  font-size: 11px;
+}
+
+.task-priority {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-priority.high::before {
+  content: "🔴";
+  font-size: 10px;
+}
+
+.task-priority.medium::before {
+  content: "🟡";
+  font-size: 10px;
+}
+
+.task-priority.low::before {
+  content: "🟢";
+  font-size: 10px;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.task-action-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.task-action-btn:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.05);
+}
+
+.task-action-btn:active {
+  transform: scale(0.95);
+}
+
+.css-editButton,
+.edit-btn {
+  background: #ea4335;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  box-shadow: 0 1px 3px rgba(234, 67, 53, 0.2);
+}
+
+/* credits: anugya mehrotra 
+@ https://github.com/anugyamehrotra 
+| inspired by https://app.todoist.com/ */ 
+
+.css-editButton:hover,
+.edit-btn:hover {
+  background: #d33b2c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(234, 67, 53, 0.3);
+}
+
+.css-editButton:active,
+.edit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(234, 67, 53, 0.2);
+}
+
+.css-deleteButton,
+.delete-btn {
+  background: #9aa0a6;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  box-shadow: 0 1px 3px rgba(154, 160, 166, 0.2);
+}
+
+.css-deleteButton:hover,
+.delete-btn:hover {
+  background: #80868b;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(154, 160, 166, 0.3);
+}
+
+.css-deleteButton:active,
+.delete-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(154, 160, 166, 0.2);
+}
+
+.css-editButton::before,
+.edit-btn::before {
+  content: "✏️";
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.css-deleteButton::before,
+.delete-btn::before {
+  content: "🗑️";
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.button-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.css-editButton.minimal,
+.css-deleteButton.minimal {
+  background: transparent;
+  color: #666;
+  box-shadow: none;
+  padding: 4px 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.css-editButton.minimal:hover {
+  background: #fce8e6;
+  color: #d33b2c;
+  border-color: #ea4335;
+}
+
+.css-deleteButton.minimal:hover {
+  background: #f5f5f5;
+  color: #80868b;
+  border-color: #9aa0a6;
+}
+
+@keyframes fadeInActions {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task-item:hover .task-actions {
+  animation: fadeInActions 0.2s ease forwards;
+}
+
+.task-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.task-category.personal {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.task-category.work {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.task-category.school {
+  background-color: #e8f5e8;
+  color: #388e3c;
+}
+
+.task-category.important {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #808080;
+}
+
+.empty-state::before {
+  content: "📝";
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.empty-state p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.navBarLeft li {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.navBarLeft li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.navBarLeft li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.navBarLeft li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.css-displayNumberOfTasks-pos\:left li {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.css-displayNumberOfTasks-pos\:left li:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.css-displayNumberOfTasks-pos\:left li:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.css-displayNumberOfTasks-pos\:left li:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.css-displayNumberOfTasks-pos\:left li:nth-child(4) {
+  animation-delay: 0.7s;
+}
+.css-displayNumberOfTasks-pos\:left li:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+@media (max-width: 768px) {
+  .css-sideNavBar-pos\:left {
+    width: 240px;
+  }
+
+  .css-aboveDisplaySection-pos\:fixed {
+    left: 240px;
+    padding: 0 20px;
+  }
+
+  .css-displayPostsAgenda-pos\:right {
+    margin-left: 240px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .css-sideNavBar-pos\:left {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .css-aboveDisplaySection-pos\:fixed {
+    left: 0;
+  }
+
+  .css-displayPostsAgenda-pos\:right {
+    margin-left: 0;
+  }
+
+  .task-item {
+    padding: 12px;
+    margin-bottom: 6px;
+  }
+
+  .task-actions {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .task-action-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .task-title {
+    font-size: 15px;
+  }
+
+  .task-description {
+    font-size: 14px;
+  }
+
+  .css-editButton,
+  .css-deleteButton {
+    padding: 8px 10px;
+    font-size: 12px;
+    min-width: 32px;
+    height: 32px;
+  }
+}
+
+.css-sideNavBar-pos\:left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.css-sideNavBar-pos\:left::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.css-sideNavBar-pos\:left::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 3px;
+}
+
+.css-sideNavBar-pos\:left::-webkit-scrollbar-thumb:hover {
+  background: #b0b0b0;
+}
+
+/* credits: anugya mehrotra @ https://github.com/anugyamehrotra | inspired by https://app.todoist.com/ */ 
