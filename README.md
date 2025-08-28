@@ -31,7 +31,8 @@ Access the project via this [link](https://to-do-app-vercel-host.vercel.app/), o
 First, clone the portfolio Repository to your local machine:
 
 ```bash
-[ ins code later]
+git clone https://github.com/anugyamehrotra/Note-It-Your-Personal-Agenda.git
+cd Note-It-Your-Personal-Agenda
 ```
 ---
 
